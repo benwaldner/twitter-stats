@@ -17,8 +17,7 @@ from urllib.parse import urlunparse
 from bs4 import BeautifulSoup
 from time import sleep
 
-OUT_FILE = "trump_tweets.csv"
-
+from config import *
 
 class TwitterSearch(metaclass=ABCMeta):
 
@@ -215,4 +214,4 @@ if __name__ == '__main__':
         writer = csv.writer(f)
         writer.writerow(["Text", "Date", "Favorites", "Retweets", "Tweet ID"])
         twit = TwitterSearchImpl(0, 5, writer)
-        twit.search("from:realdonaldtrump")
+        twit.search("from:"+user)

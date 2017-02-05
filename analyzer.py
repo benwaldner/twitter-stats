@@ -7,7 +7,9 @@ import pandas as pd
 from nltk.corpus import stopwords
 
 from dnnsent.sentiment import sentiment_score
-from twitterize import preprocess
+from tokenizer import preprocess
+
+from config import *
 
 #################### CONFIG ######################
 
@@ -38,28 +40,14 @@ def process(series, full=False):
 
 ##################### MAIN #######################
 
-
 # Read classified dataset
-df = pd.read_csv('data/trump_classified.csv')
+df = pd.read_csv(OUT_FILE)
 
 if to_process:
-    df['processed'] = process(df['4'].astype(unicode), full)
+    df['processed'] = process(df['Text'].astype(unicode), full)
 else:
-    df['processed'] = df['4'].astype(unicode)
+    df['processed'] = df['Text'].astype(unicode)
 
 # Apply sentiment analysis
 df['sentiments'] = df['processed'].apply(sentiment_score)
-df.to_csv('predictions/prd_trump_classified.csv')
-
-
-# Read training dataset
-df2 = pd.read_csv('data/trump_unclassified.csv')
-
-if to_process:
-    df2['processed'] = process(df2['Text'].astype(unicode), full)
-else:
-    df2['processed'] = df2['Text'].astype(unicode)
-
-# Apply sentiment analysis
-df2['sentiments'] = df2['processed'].apply(sentiment_score)
-df2.to_csv('predictions/prd_trump_unclassified.csv')
+df.to_csv('predictions/' + user + '.csv')
