@@ -1,0 +1,13 @@
+{% extends 'layouts/form.html' %}
+{% block title %}Search{% endblock %}
+{% block content %}
+  <form method="post" class="form" action="/results">
+    <h3 class="form-heading">Search<a href="/" title="Back to homepage"><i class="fa fa-home pull-right"></i></a></h3>
+    {{ form.ticker(class_ = 'form-control last-input', placeholder = form.ticker.label.text, required = true, autofocus = true) }}
+    {{ form.keyword(class_ = 'form-control last-input', placeholder = form.keyword.label.text, required = true) }}
+    {{ form.start(class_ = 'form-control last-input', placeholder = "yyyy-mm-dd", required = true) }}
+    {{ form.end(class_ = 'form-control last-input', placeholder = "yyyy-mm-dd", required = true) }}
+    <input type="submit" value="Submit" class="btn btn-primary btn-lg btn-block">
+    <br>
+  </form>
+{% endblock %}
